@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="actionbar">#BF360C</color>
+    <color name="actionbar_text">#fafafa</color>
+    <color name="accentColor">#E8EAF6</color>  
+</resources>

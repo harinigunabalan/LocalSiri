@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:background="@drawable/message_bar" >
+	    
+	    <TextView
+	        android:id="@+id/editText1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/askDoubt" 
+	        android:gravity="center_horizontal" 
+	        android:layout_gravity="top"
+	        android:textSize="10pt">
+	    </TextView>
+	    
+ 	</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+    <EditText
+        android:id="@+id/Topic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_margin="5sp"
+               
+        android:ems="10"
+        android:hint="@string/Topic">                      
+    </EditText>
+    
+  </LinearLayout>    
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+	    <EditText
+	        android:id="@+id/TopicLocation"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+			android:layout_weight="1"	
+       		android:layout_margin="5sp"			
+	        android:ems="10"	        
+	        android:hint="@string/EnterLocation">	        	       
+	    </EditText>	    	    
+     </LinearLayout> 
+    
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    <CheckBox
+        android:id="@+id/UseMyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/MyLocation"
+        android:onClick="onCheckboxClicked"
+        android:gravity="center_horizontal"  />
+	</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/TopicContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="5sp" 
+        android:ems="10"
+        android:hint="@string/Query"
+        android:inputType="textMultiLine"         
+        android:lines="10">             
+    </EditText>
+	</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    
+		<Button
+		    android:id="@+id/ask"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/ask"
+		    android:gravity="center_horizontal" />
+      </LinearLayout>
+    </LinearLayout>

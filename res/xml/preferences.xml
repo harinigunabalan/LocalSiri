@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- Choice User Preferences -->
+    <PreferenceCategory
+        android:key="user_preferences"
+        android:title="User Preferences" >
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_disturbance"
+            android:summary="Set your preference for Notification"
+            android:title="Do Not Disturb" />
+    </PreferenceCategory>
+
+    <!-- Service Preferences -->
+    <PreferenceCategory
+        android:key="service"
+        android:title="Service" >
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="pref_service"
+            android:summary="Do not stop unless needed"
+            android:title="Master Service" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:dependency="pref_service"
+            android:key="pref_sub_service"
+            android:summary="Temporary Pause and Retrieve"
+            android:title="Temporary Pause" />
+    </PreferenceCategory>
+
+    <!-- Location Preferences -->
+    <PreferenceCategory
+        android:key="location_update"
+        android:title="Location Update" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_location_update"
+            android:disableDependentsState="true"
+            android:summary="[Recommended] Application takes care of Optmizing"
+            android:title="Intelligent Optimizer" />
+
+        <ListPreference
+            android:defaultValue="moderate"
+            android:dependency="pref_location_update"
+            android:entries="@array/locationChoice"
+            android:entryValues="@array/locationChoiceValues"
+            android:key="pref_location_choice"
+            android:summary="Manually define Location Update scheme"
+            android:title="Choose Location Update Scheme" />
+    </PreferenceCategory>
+
+    <!-- Upload Preferences -->
+    <PreferenceCategory
+        android:key="upload"
+        android:title="Upload Settings" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:key="pref_wifi_only"
+            android:summary="Enable to avoid using LTE(3G)"
+            android:title="Use Wi-Fi only" />
+
+        <ListPreference
+            android:defaultValue="none"
+            android:dependency="pref_wifi_only"
+            android:entries="@array/uploadChoice"
+            android:entryValues="@array/uploadChoiceValues"
+            android:key="pref_wifi_3g"
+            android:summary="Manually define Upload scheme"
+            android:title="Choose Upload Scheme" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

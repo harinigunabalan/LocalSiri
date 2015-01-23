@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+<Button android:id="@+id/MyTopics"  
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:text="@string/MyTopics"/>
+
+<Button android:id="@+id/Query"   
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:text="@string/Query"/>
+
+<Button 
+    android:id="@+id/RelTopics"    
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:text="@string/RelTopics"/>
+
+<Button 
+    android:id="@+id/City"    
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:text="@string/City"/>
+
+</LinearLayout>

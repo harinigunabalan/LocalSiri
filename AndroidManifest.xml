@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tud.kom.dss6.localsiri"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="21" />
+
+    <permission
+        android:name="dss.komlab.tu.localsiri.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+
+    <!-- Push Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="dss.komlab.tu.localsiri.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".LocalSiriApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/push_notification_icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="tud.kom.dss6.localsiri.localservice.LocationMain"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:theme="@style/CustomActionBarTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="tud.kom.dss6.localsiri.localservice.MainLocation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="tud.kom.dss6.localsiri.localservice.Settings"
+            android:label="@string/app_name"
+            android:theme="@style/PreferencesTheme" >
+        </activity>
+
+        <service android:name="tud.kom.dss6.localsiri.localservice.LocalSiriService" >
+        </service>
+
+        <activity
+            android:name="tud.kom.dss6.localsiri.knowuraddress.KnowYourAddress"
+            android:label="@string/title_activity_know_your_address"
+            android:parentActivityName="tud.kom.dss6.localsiri.localservice.LocationMain"
+            android:theme="@style/CustomActionBarTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="kom.dss6.localservice.LocationMain" />
+        </activity>
+
+        <!-- Local Siri Activities -->
+        <activity
+            android:name="tud.kom.dss6.localsiri.HomeScreen"
+            android:label="@string/app_name"
+            android:parentActivityName="tud.kom.dss6.localsiri.localservice.LocationMain" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dss6.komlab.tu.localsiri.localservice.LocationMain" />
+
+            <!-- Push Settings Start -->
+            <!-- Notification Intent -->
+            <intent-filter>
+                <action android:name="dss6.komlab.tu.localsiri.IBMPushNotification" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- Push Settings End -->
+
+        </activity>
+        <activity
+            android:name="tud.kom.dss6.localsiri.MyTopics"
+            android:label="@string/MyTopics"
+            android:parentActivityName="tud.kom.dss6.localsiri.HomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dss6.komlab.tu.localsiri.HomeScreen" />
+        </activity>
+        <activity
+            android:name="tud.kom.dss6.localsiri.askQuery"
+            android:label="@string/Query"
+            android:parentActivityName="tud.kom.dss6.localsiri.HomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dss6.komlab.tu.localsiri.HomeScreen" />
+        </activity>
+        <activity
+            android:name="tud.kom.dss6.localsiri.RelTopics"
+            android:label="@string/RelTopics"
+            android:parentActivityName="tud.kom.dss6.localsiri.HomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dss6.komlab.tu.localsiri.HomeScreen" />
+        </activity>
+        <activity
+            android:name="tud.kom.dss6.localsiri.viewCity"
+            android:label="@string/City"
+            android:parentActivityName="tud.kom.dss6.localsiri.HomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dss6.komlab.tu.localsiri.HomeScreen" />
+        </activity>
+        <activity
+            android:name="tud.kom.dss6.localsiri.ChatForum"
+            android:label="@string/ChatForum"
+            android:parentActivityName="tud.kom.dss6.localsiri.MyTopics" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dss6.komlab.tu.localsiri.HomeScreen" />
+        </activity>
+
+        <!-- Push Settings Start -->
+        <!-- Add GCM Intent Service and intent-filters for RECEIVE and REGISTRATION of notifications -->
+        <activity android:name="com.ibm.mobile.services.push.IBMUIActivity" />
+
+        <service android:name="com.ibm.mobile.services.push.IBMPushIntentService" />
+
+        <receiver
+            android:name="com.ibm.mobile.services.push.IBMPushBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="dss6.komlab.tu.localsiri" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="dss6.komlab.tu.localsiri" />
+            </intent-filter>
+        </receiver>
+        <!-- Push Settings End -->
+
+    </application>
+
+</manifest>

@@ -1,0 +1,95 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainLocation" >
+
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <Button
+            android:id="@+id/add_geoPoints"
+            android:text="@string/add_geoPoints"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="#555555"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/display_geoPint"
+            android:text="@string/display_geoPint"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:background="#555555"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:text="@string/date"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="#ff4d98c1"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:text="@string/latitude"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="#ff4d98c1"
+            android:gravity="center_vertical|center_horizontal"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:text="@string/longitude"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="#ff4d98c1"
+            android:gravity="center_vertical|center_horizontal"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ababab"
+            android:layout_weight="1">
+        </ListView>
+
+    </TableRow>
+
+</TableLayout>

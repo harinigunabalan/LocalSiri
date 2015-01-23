@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LocalSiri</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_geoPoints">Record Current Location</string>
+    <string name="display_geoPint">Display Saved Locations</string>
+    <string name="date">Date</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="noInfo">Location Info Not Available</string>
+    <string name="lat_hint">Ur latitude</string>
+    <string name="lon_hint">Ur longitude</string>
+    <string name="adding">Adding Geo Location to Local DB</string>
+
+    <!-- Ask Siri Strings -->
+    <string name="MyTopics">My Topics</string>
+    <string name="MyLocation">Use My Current Location</string>
+    <string name="EnterLocation">EnterLocation</string>
+    <string name="ask">ASK</string>
+    <string name="Topic">Enter Topic Name</string>
+    <string name="Query">Ask your Doubt</string>
+    <string name="RelTopics">Relevant Topics</string>
+    <string name="City">Know your city better</string>
+    <string name="askDoubt">I want to know about&#8230;</string>
+    <string name="ChatForum">Topic Discussion</string>
+    <string name="main_empty_list">There are no posts.</string>
+
+    <!-- Home Screen Grid View Lables -->
+    <string name="location">Location</string>
+    <string name="settings">Settings</string>
+    <string name="start">Start Service</string>
+    <string name="stop">Stop Service</string>
+    <string name="title_activity_know_your_address">KnowYourAddress</string>
+
+</resources>

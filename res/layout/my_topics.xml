@@ -1,0 +1,41 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainLocation" >
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/Topic"
+            android:text="@string/MyTopics"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="#ff4d98c1"
+            android:gravity="center_vertical|center_horizontal" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ListView
+            android:id="@+id/listTopics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ababab"
+            android:layout_weight="1">
+        </ListView>
+
+    </TableRow>
+
+</TableLayout>

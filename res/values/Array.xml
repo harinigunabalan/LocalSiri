@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="locationChoice">
+        <item name="choice1">Moderate</item>
+        <item name="choice2">Lazy Man Update</item>
+    </string-array>
+    
+    <string-array name="locationChoiceValues">
+        <item name="choice1">moderate</item>
+        <item name="choice2">lazy</item>
+    </string-array>
+    
+    
+    <string-array name="uploadChoice">
+        <item name="choice11">Normal 3G</item>
+        <item name="choice21">Optimized 3G</item>
+    </string-array>
+    
+    <string-array name="uploadChoiceValues">
+        <item name="choice11">normal</item>
+        <item name="choice21">optimized</item>
+    </string-array>
+    
+</resources>
