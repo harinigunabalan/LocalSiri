@@ -45,6 +45,8 @@ import com.ibm.mobile.services.data.IBMDataObject;
 
 public class askQuery  extends Activity {
 	
+	// changed files
+	
 	public final static String MY_TOPICS 	= "dss6.komlab.tu.localsiri.MainLocation.MSG1";
 	private boolean useMyLocationFlag = false;
     protected LocationManager locationManager;
