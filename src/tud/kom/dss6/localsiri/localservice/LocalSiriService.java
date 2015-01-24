@@ -306,7 +306,7 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		mCurrentLocation = location;
 		addGeoLocation(mCurrentLocation);
 		monitorContext();		
-		if(uploadCounter >= RECORD_COUNTER ){			// or 12? Ask schu && pref_wifi_only != true
+		if(uploadCounter >= RECORD_COUNTER ){		
 			
 			UploadService uploadService = new UploadService(this);
 			success = uploadService.uploadOptimizer(mode);
