@@ -6,7 +6,9 @@ import tud.kom.dss6.localsiri.knowuraddress.KnowYourAddress;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.Toast;
 
 public class LocationMain extends Activity {
 
@@ -27,10 +30,11 @@ public class LocationMain extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_location_main);
-		
-	    ActionBar actionBar = getActionBar();
-	    actionBar.setHomeButtonEnabled(true);
-	    
+
+		ActionBar actionBar = getActionBar();
+		actionBar.setHomeButtonEnabled(true);
+
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		gridview.setAdapter(new ImageAdapter(this));
@@ -44,7 +48,7 @@ public class LocationMain extends Activity {
 					Intent mKnowYourAddress = new Intent(LocationMain.this,
 							KnowYourAddress.class);
 					startActivity(mKnowYourAddress);
-					
+
 					break;
 				case 1:
 					Intent settings = new Intent(LocationMain.this,
@@ -71,8 +75,25 @@ public class LocationMain extends Activity {
 			}
 
 		});
+
+		SharedPreferences sharedPref = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		Boolean mMasterService = sharedPref.getBoolean(
+				Constants.SETTINGS.pref_key_master_service, true);
+		if (!mMasterService) {
+			Toast.makeText(this,
+					"Master Service is not running.\n Please turn it on",
+					Toast.LENGTH_LONG).show();
+
+		} else {
+			Intent startIntent = new Intent(LocationMain.this,
+					LocalSiriService.class);
+			startIntent.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
+			startService(startIntent);
+		}
+
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();

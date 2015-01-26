@@ -54,15 +54,15 @@ public class UploadService {
 			isWiFi = checkisConnectedToWiFi();
 			if(isWiFi == true){
 				success = fromSQLiteToBluemix(false);
-				updateCurrentPosition();
+				//updateCurrentPosition();
 			}
 			else if (isWiFi == false && mode == 2 ){
 				success = fromSQLiteToBluemix(false);
-				updateCurrentPosition();
+				//updateCurrentPosition();
 			}
 			else if (isWiFi == false && mode == 1 ){
 				success = fromSQLiteToBluemix(true);
-				updateCurrentPosition();
+				//updateCurrentPosition();
 			}
 		}				
 		return success;

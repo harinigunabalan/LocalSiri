@@ -33,5 +33,17 @@
     <string name="start">Start Service</string>
     <string name="stop">Stop Service</string>
     <string name="title_activity_know_your_address">KnowYourAddress</string>
+    
+    
+    <!-- Preference(Settings) Screen - Default Shared Prefereces Key-->
+    <string name="pref_key_do_not_disturb">pref_key_do_not_disturb</string>
+    <string name="pref_key_master_service">pref_key_master_service</string>
+    <string name="pref_key_temporary_service">pref_key_temporary_service</string>
+    <string name="pref_key_intelligent_optimizer">pref_key_intelligent_optimizer</string>
+    <string name="pref_key_location_scheme">pref_key_location_scheme</string>
+    <string name="pref_key_wifi_only">pref_key_wifi_only</string>
+    <string name="pref_key_upload_scheme">pref_key_upload_scheme Service</string>
+    
+    
 
 </resources>

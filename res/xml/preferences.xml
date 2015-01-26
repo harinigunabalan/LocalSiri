@@ -7,7 +7,7 @@
         android:title="User Preferences" >
         <SwitchPreference
             android:defaultValue="false"
-            android:key="pref_disturbance"
+            android:key="@string/pref_key_do_not_disturb"
             android:summary="Set your preference for Notification"
             android:title="Do Not Disturb" />
     </PreferenceCategory>
@@ -18,13 +18,13 @@
         android:title="Service" >
         <SwitchPreference
             android:defaultValue="true"
-            android:key="pref_service"
+            android:key="@string/pref_key_master_service"
             android:summary="Do not stop unless needed"
             android:title="Master Service" />
         <SwitchPreference
             android:defaultValue="true"
-            android:dependency="pref_service"
-            android:key="pref_sub_service"
+            android:dependency="@string/pref_key_master_service"
+            android:key="@string/pref_key_temporary_service"
             android:summary="Temporary Pause and Retrieve"
             android:title="Temporary Pause" />
     </PreferenceCategory>
@@ -35,17 +35,17 @@
         android:title="Location Update" >
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="pref_location_update"
+            android:key="@string/pref_key_intelligent_optimizer"
             android:disableDependentsState="true"
             android:summary="[Recommended] Application takes care of Optmizing"
             android:title="Intelligent Optimizer" />
 
         <ListPreference
             android:defaultValue="moderate"
-            android:dependency="pref_location_update"
+            android:dependency="@string/pref_key_intelligent_optimizer"
             android:entries="@array/locationChoice"
             android:entryValues="@array/locationChoiceValues"
-            android:key="pref_location_choice"
+            android:key="@string/pref_key_location_scheme"
             android:summary="Manually define Location Update scheme"
             android:title="Choose Location Update Scheme" />
     </PreferenceCategory>
@@ -57,16 +57,16 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:disableDependentsState="true"
-            android:key="pref_wifi_only"
+            android:key="@string/pref_key_wifi_only"
             android:summary="Enable to avoid using LTE(3G)"
             android:title="Use Wi-Fi only" />
 
         <ListPreference
             android:defaultValue="none"
-            android:dependency="pref_wifi_only"
+            android:dependency="@string/pref_key_wifi_only"
             android:entries="@array/uploadChoice"
             android:entryValues="@array/uploadChoiceValues"
-            android:key="pref_wifi_3g"
+            android:key="@string/pref_key_upload_scheme"
             android:summary="Manually define Upload scheme"
             android:title="Choose Upload Scheme" />
     </PreferenceCategory>

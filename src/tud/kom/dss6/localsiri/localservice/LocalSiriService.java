@@ -34,24 +34,21 @@ import com.google.android.gms.location.LocationServices;
 public class LocalSiriService extends Service implements ConnectionCallbacks,
 		OnConnectionFailedListener, LocationListener {
 
-	private static final String TAG = "LocalSiriService";
-
-	protected LocationManager locationManager;
+	private static final String TAG = LocalSiriService.class.getSimpleName(); 
 
 	protected GoogleApiClient mGoogleApiClient;
 
+	protected LocationManager locationManager;
 	protected LocationRequest mLocationRequest;
-
 	protected Location mCurrentLocation;
 
 	protected Boolean mRequestingLocationUpdates;
-
 	protected boolean mServiceStatus;
 
-	DBAdapter DB;
 	private int uploadCounter = 0;
 	IntentFilter ifilter;
 	Intent batteryStatus;
+	DBAdapter DB;
 
 	@Override
 	public void onCreate() {
@@ -64,7 +61,7 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 
 		ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		batteryStatus = this.registerReceiver(null, ifilter);
-		
+
 		buildGoogleApiClient();
 
 	}
@@ -297,24 +294,25 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 	}
 
 	@Override
-	public void onLocationChanged(Location location) {		
+	public void onLocationChanged(Location location) {
 		boolean success = false;
-		int mode = 2;			// set the mode as 0-WiFi only, 1-Optimized 3G and 2-Normal 3G
+		int mode = 2; // set the mode as 0-WiFi only, 1-Optimized 3G and
+						// 2-Normal 3G
 		int RECORD_COUNTER;
-		RECORD_COUNTER = (mode == 1)? 12 : 6;
+		RECORD_COUNTER = (mode == 1) ? 12 : 6;
 		uploadCounter = uploadCounter + 1;
 		mCurrentLocation = location;
 		addGeoLocation(mCurrentLocation);
-		monitorContext();		
-		if(uploadCounter >= RECORD_COUNTER ){		
-			
+		monitorContext();
+		if (uploadCounter >= RECORD_COUNTER) {
+
 			UploadService uploadService = new UploadService(this);
 			success = uploadService.uploadOptimizer(mode);
-			
-			if(success == true){
-				uploadCounter = 0;				
-				// TODO: clear local SQLite DB 
-			}				
+
+			if (success == true) {
+				uploadCounter = 0;
+				// TODO: clear local SQLite DB
+			}
 		}
 		// TODO: Save upload Counter to Shared Preferences
 	}

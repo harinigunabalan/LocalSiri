@@ -46,4 +46,13 @@ public class Constants {
 		public static final int DEAD = 0;
 	}
 
+	public interface SETTINGS {
+		public static final String pref_key_do_not_disturb = "pref_key_do_not_disturb";
+		public static final String pref_key_master_service = "pref_key_master_service";
+		public static final String pref_key_temporary_service = "pref_key_temporary_service";
+		public static final String pref_key_intelligent_optimizer = "pref_key_intelligent_optimizer";
+		public static final String pref_key_location_scheme = "pref_key_location_scheme";
+		public static final String pref_key_wifi_only = "pref_key_wifi_only";
+		public static final String pref_key_upload_scheme = "pref_key_upload_scheme Service";
+	}
 }
