@@ -45,24 +45,30 @@ public class LocationMain extends Activity {
 
 				switch (position) {
 				case 0:
+					startActivity(new Intent(LocationMain.this, HomeScreen.class));
+					break;
+				case 1: 
+					startActivity(new Intent(LocationMain.this,KnowYourAddress.class));
+					break;
+				case 2:
 					Intent mKnowYourAddress = new Intent(LocationMain.this,
 							KnowYourAddress.class);
 					startActivity(mKnowYourAddress);
 
 					break;
-				case 1:
+				case 3:
 					Intent settings = new Intent(LocationMain.this,
 							Settings.class);
 					startActivity(settings);
 					break;
-				case 2:
+				case 4:
 					Intent startIntent = new Intent(LocationMain.this,
 							LocalSiriService.class);
 					startIntent
 							.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
 					startService(startIntent);
 					break;
-				case 3:
+				case 5:
 					Intent stopIntent = new Intent(LocationMain.this,
 							LocalSiriService.class);
 					stopIntent

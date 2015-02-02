@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 
@@ -24,7 +25,10 @@ public class HomeScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_screen);  
+        setContentView(R.layout.home_screen);
+        
+        ActionBar actionBar = getActionBar();
+		actionBar.setHomeButtonEnabled(true);
         
         myTopics 	= (Button) findViewById(R.id.MyTopics);
         relTopics 	= (Button) findViewById(R.id.RelTopics);

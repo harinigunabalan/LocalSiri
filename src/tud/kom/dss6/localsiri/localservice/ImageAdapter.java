@@ -68,11 +68,18 @@ public class ImageAdapter extends BaseAdapter {
 	}
 
 	// references to our images
-	private Integer[] mImageIds = { R.drawable.ic_home_location,
-			R.drawable.ic_home_setting, R.drawable.ic_home_start,
+	private Integer[] mImageIds = { 
+			R.drawable.ic_home_ask,
+			R.drawable.ic_home_trace,
+			R.drawable.ic_home_location,
+			R.drawable.ic_home_setting, 
+			R.drawable.ic_home_start,
 			R.drawable.ic_home_stop };
 
 	// references to our images
-	private Integer[] mLabelIds = { R.string.location, R.string.settings,
+	private Integer[] mLabelIds = { 
+			R.string.localsiri,
+			R.string.trace,
+			R.string.location, R.string.settings,
 			R.string.start, R.string.stop };
 }

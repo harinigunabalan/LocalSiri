@@ -3,13 +3,7 @@
     tools:context="kom.dss6.localservice.LocationMain" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="Setting"
-        android:icon="@drawable/ic_notification"/>
-    <item
         android:id="@+id/menu_save"
-        android:title="Save"/>
+        android:title="@string/action_settings"/>
 
 </menu>
