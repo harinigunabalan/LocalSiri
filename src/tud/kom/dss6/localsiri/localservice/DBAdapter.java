@@ -28,6 +28,9 @@ public class DBAdapter extends SQLiteOpenHelper{
     private static final String DB_TABLE_READ_ALL_GEOPOINTS =
             "SELECT * FROM " + DB_TABLE_NAME +
                     " ORDER BY 1 DESC";
+    private static final String DB_TABLE_READ_LATEST_GEOPOINT =
+            "SELECT * FROM " + DB_TABLE_NAME +
+                    " ORDER BY 1 DESC LIMIT 1";
 
     public static DBAdapter getInstance(Context context) {
 
@@ -100,5 +103,26 @@ public class DBAdapter extends SQLiteOpenHelper{
         
         return geoArrayList;
     }
+	public HashMap<String, String> getLatestSavedGeoPoint() {
+		
+		HashMap<String, String> latestGeoPoint = new HashMap<String, String>();
+		SQLiteDatabase DB_r = this.getReadableDatabase();
+
+        Cursor cursor = DB_r.rawQuery(DB_TABLE_READ_LATEST_GEOPOINT, null);
+
+        if(cursor.moveToFirst()) {
+
+            do {
+            	
+                latestGeoPoint.put(LocationMain.KEY_DATE,cursor.getString(0));
+                latestGeoPoint.put(LocationMain.KEY_LATITUDE,cursor.getString(1));
+                latestGeoPoint.put(LocationMain.KEY_LONGITUDE,cursor.getString(2));
+
+            }while(cursor.moveToNext());
+        }        
+        cursor.close();
+        
+        return latestGeoPoint;
+	}
 
 }

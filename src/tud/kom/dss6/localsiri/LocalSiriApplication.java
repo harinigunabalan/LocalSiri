@@ -10,15 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import tud.kom.dss6.localsiri.IBMDataObjects.CurrentPosition;
 import tud.kom.dss6.localsiri.IBMDataObjects.Position;
 import tud.kom.dss6.localsiri.IBMDataObjects.Post;
 import tud.kom.dss6.localsiri.IBMDataObjects.Topic;
 import android.app.Activity;
 import android.app.Application;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.AssetManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import bolts.Continuation;
@@ -35,10 +39,18 @@ public class LocalSiriApplication extends Application{
 	private static final String APP_ID = "applicationID";
 	private static final String APP_SECRET = "applicationSecret";
 	private static final String APP_ROUTE = "applicationRoute";
-	private static final String PROPS_FILE = "LocalSiri.properties";	
+	private static final String PROPS_FILE = "LocalSiri.properties";
+	private static Context mContext;
 	public static final int EDIT_ACTIVITY_RC = 1;
 	private static final String CLASS_NAME = LocalSiriApplication.class
 			.getSimpleName();
+	
+// Shared Preference Variables	
+	public static final String PREFERENCES = "LocalSiriPrefs" ;
+	public static final String MAC = "DeviceMAC" ;
+	public static final String LAST_UPLOAD = "LastUpload" ;
+	public static final String UPLOAD_COUNTER = "UploadCounter" ;
+	public static final String CURRENT_LOCATION = "CurrentLocation" ;
 	
 // Push Declarations begin	
 	public static IBMPush push = null;
@@ -51,6 +63,7 @@ public class LocalSiriApplication extends Application{
 	List<Position> positionList; 
 	List<Topic> topicList;
 	List<Post> postList;
+	List<CurrentPosition> currentPositionList;
 	
 // Tracking the activity status within four of the ActivityLifecycleCallbacks
 // onActivityCreated, onActivityStarted, onActivityResumed, onActivityPaused 	
@@ -122,22 +135,17 @@ public class LocalSiriApplication extends Application{
 
 	@Override
 	public void onCreate() {
-        // in most cases the following initialising code using defaults is probably sufficient:
-        //
-        // LocationLibrary.initialiseLibrary(getBaseContext(), "com.your.package.name");
-        //
-        // however for the purposes of the test app, we will request unrealistically frequent location broadcasts
-        // every 1 minute, and force a location update if there hasn't been one for 2 minutes.		
-		//LocationLibrary.initialiseLibrary(getBaseContext(), 60 * 1000, 2 * 60 * 1000, "dss6.komlab.tu.localsiri");
+      
 		super.onCreate();
 		positionList = new ArrayList<Position>();
 		topicList = new ArrayList<Topic>();
 		postList = new ArrayList<Post>();
+		currentPositionList = new ArrayList<CurrentPosition>();
 		// Read from properties file.
 		Properties props = new java.util.Properties();
-		Context context = getApplicationContext();
+		mContext = getApplicationContext();
 		try {
-			AssetManager assetManager = context.getAssets();
+			AssetManager assetManager = mContext.getAssets();
 			props.load(assetManager.open(PROPS_FILE));
 			Log.i(CLASS_NAME, "Found configuration file: " + PROPS_FILE);
 		} catch (FileNotFoundException e) {
@@ -154,6 +162,7 @@ public class LocalSiriApplication extends Application{
 		Position.registerSpecialization(Position.class);
 		Topic.registerSpecialization(Topic.class);
 		Post.registerSpecialization(Post.class);
+		CurrentPosition.registerSpecialization(CurrentPosition.class); 
 		
 		// Initialize IBM Push service.
 		IBMPush.initializeService();
@@ -183,8 +192,25 @@ public class LocalSiriApplication extends Application{
 	    	processPushMessage(message);
 	      }
 	    };		
-		
+
+    	/* Set the Device MAC address*/    	
+    	WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+    	WifiInfo wInfo = wifiManager.getConnectionInfo();
+    	String macAddress = wInfo.getMacAddress();	    
+	    
+	    // Creating Shared Preference for the Application
+    	SharedPreferences sharedpreferences = mContext.getSharedPreferences(LocalSiriApplication.PREFERENCES, MODE_PRIVATE);    	
+	    Editor editor = sharedpreferences.edit();
+	    editor.putString(MAC, macAddress);
+	    editor.putString(LAST_UPLOAD, "");
+	    editor.putInt(UPLOAD_COUNTER, 0);
+	    editor.putBoolean(CURRENT_LOCATION, false);
+	    editor.commit(); 
 	}
+	
+    public static Context getContext() {
+        return mContext;
+    }
 	
 	public void processPushMessage(final IBMSimplePushNotification message){
 		String Payload = message.getPayload();
@@ -192,8 +218,7 @@ public class LocalSiriApplication extends Application{
 		Intent intent = new Intent(this, HomeScreen.class);
     	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
     	intent.putExtra("Test", Payload);
-        //startActivity(intent);
-    	PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        startActivity(intent);    
 	}
 	
 	/**
@@ -222,5 +247,14 @@ public class LocalSiriApplication extends Application{
 	public List<Post> getPostList() {
 		return postList;
 	}
+	
+	/**
+	 * returns the currentPositionList, an array of Position objects.
+	 * 
+	 * @return CurrentPositionList
+	 */
+	public List<CurrentPosition> getCurrentPositionList() {
+		return currentPositionList;
+	}	
 	
 }

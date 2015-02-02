@@ -117,7 +117,7 @@ public class LocationMain extends Activity {
 			startActivity(intent);
 			break;
 		case R.id.menu_save:
-			startActivity(new Intent(this, HomeScreen.class));
+			startActivity(new Intent(this, Settings.class));
 			return true;
 		}
 		return false;

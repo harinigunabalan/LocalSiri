@@ -3,16 +3,23 @@ package tud.kom.dss6.localsiri.localservice;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
+import tud.kom.dss6.localsiri.LocalSiriApplication;
 import tud.kom.dss6.localsiri.R;
+import tud.kom.dss6.localsiri.IBMDataObjects.CurrentPosition;
 import tud.kom.dss6.localsiri.localservice.collection.CriteriaSelector;
 import tud.kom.dss6.localsiri.localservice.collection.Optimizer;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -45,6 +52,10 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 	protected Boolean mRequestingLocationUpdates;
 	protected boolean mServiceStatus;
 
+	
+	LocalSiriApplication lsApplication;
+	List<CurrentPosition> currentPositionList;
+
 	private int uploadCounter = 0;
 	IntentFilter ifilter;
 	Intent batteryStatus;
@@ -63,6 +74,10 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		batteryStatus = this.registerReceiver(null, ifilter);
 
 		buildGoogleApiClient();
+		
+        /* Use application class to maintain global state. */
+		lsApplication = (LocalSiriApplication) getApplication();
+		currentPositionList = lsApplication.getCurrentPositionList(); 
 
 	}
 
@@ -295,26 +310,44 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 
 	@Override
 	public void onLocationChanged(Location location) {
+		
+		Context context = getApplicationContext();
+		SharedPreferences sharedpreferences = context.getSharedPreferences(LocalSiriApplication.PREFERENCES, MODE_PRIVATE);
 		boolean success = false;
 		int mode = 2; // set the mode as 0-WiFi only, 1-Optimized 3G and
 						// 2-Normal 3G
 		int RECORD_COUNTER;
+		RECORD_COUNTER = (mode == 1)? 12 : 6;
+		uploadCounter = sharedpreferences.getInt(LocalSiriApplication.UPLOAD_COUNTER, 0);
 		RECORD_COUNTER = (mode == 1) ? 12 : 6;
 		uploadCounter = uploadCounter + 1;
+		// edit shared Preference
+		Editor editor = sharedpreferences.edit();
+	    editor.putInt(LocalSiriApplication.UPLOAD_COUNTER, uploadCounter);
+	    editor.commit(); 
+	    
 		mCurrentLocation = location;
 		addGeoLocation(mCurrentLocation);
-		monitorContext();
+		monitorContext();		
+
 		if (uploadCounter >= RECORD_COUNTER) {
 
-			UploadService uploadService = new UploadService(this);
+			UploadService uploadService = new UploadService(this, currentPositionList);
 			success = uploadService.uploadOptimizer(mode);
+			
+			if(success == true){
+				uploadCounter = 0;								
+			    editor.putInt(LocalSiriApplication.UPLOAD_COUNTER, uploadCounter);
+			    editor.putString(LocalSiriApplication.LAST_UPLOAD, "");
+			    editor.commit();
+				// TODO: clear local SQLite DB
+			}				
 
 			if (success == true) {
 				uploadCounter = 0;
 				// TODO: clear local SQLite DB
 			}
 		}
-		// TODO: Save upload Counter to Shared Preferences
 	}
 
 	@Override
