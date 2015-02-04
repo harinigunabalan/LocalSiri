@@ -31,7 +31,7 @@ public class Constants {
 	}
 
 	public interface PRIORITY_LEVEL {
-		public static final int HIGH = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
+		public static final int HIGH = LocationRequest.PRIORITY_HIGH_ACCURACY;
 		public static final int MEDIUM = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY;
 		public static final int LOW = LocationRequest.PRIORITY_LOW_POWER;
 		public static final int CRITICAL = LocationRequest.PRIORITY_NO_POWER;

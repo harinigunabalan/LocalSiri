@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="162dp"
         android:layout_below="@+id/btn_ask_me"
-        android:alpha="0.8"
+        android:alpha="0.3"
         android:scaleType="fitXY"
         android:src="@drawable/img_city_street_1" 
         android:visibility="gone"/>

@@ -41,22 +41,35 @@ public class KnowYourAddress extends Activity {
 	}
 
 	public void findAddress(View view) {
-
+		Location mLocation;
 		Log.e("KUA", "Came Here");
-		Location mLocation = locationManager
+		mLocation = locationManager
 				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
+		if(mLocation == null){
+			Log.e("Change in provider:", "Trying Network Provider...");
+		mLocation = locationManager
+				.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD
 				&& Geocoder.isPresent()) {
-			// Show the activity indicator
-			mActivityIndicator.setVisibility(View.VISIBLE);
-			/*
-			 * Reverse geocoding is long-running and synchronous. Run it on a
-			 * background thread. Pass the current location to the background
-			 * task. When the task finishes, onPostExecute() displays the
-			 * address.
-			 */
-			(new GetAddressTask(this)).execute(mLocation);
+			if(mLocation != null){
+				// Show the activity indicator
+				mActivityIndicator.setVisibility(View.VISIBLE);
+				/*
+				 * Reverse geocoding is long-running and synchronous. Run it on a
+				 * background thread. Pass the current location to the background
+				 * task. When the task finishes, onPostExecute() displays the
+				 * address.
+				 */
+				(new GetAddressTask(this)).execute(mLocation);
+			}else{
+				Toast.makeText(this,
+						"Location is Empty. Please reset GPS Switch",
+						Toast.LENGTH_SHORT).show();
+				mActivityIndicator.setVisibility(View.GONE);
+				
+			}
+			
 		} else {
 			Toast.makeText(this,
 					"Sorry! Your Device does not support this feature",
@@ -145,7 +158,7 @@ public class KnowYourAddress extends Activity {
 			mAddress.setText(address);
 			mAddressImage.setVisibility(View.VISIBLE);
 			mAddress.setVisibility(View.VISIBLE);
-			
+
 		}
 	}
 

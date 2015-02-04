@@ -226,7 +226,7 @@ public class MainLocation extends ListActivity{
         return dateFormat.format(date);
     }
     protected void launchHomeScreen() {
-    	Intent intent = new Intent(this, HomeScreen.class);
+    	Intent intent = new Intent(this, AskSiri.class);
     	String msg = "Test";
     	intent.putExtra(EXTRA_MESSAGE, msg);
         startActivity(intent);

@@ -1,6 +1,7 @@
 package tud.kom.dss6.localsiri.localservice;
 
-import tud.kom.dss6.localsiri.HomeScreen;
+import tud.kom.dss6.localsiri.AskSiri;
+import tud.kom.dss6.localsiri.MyTopics;
 import tud.kom.dss6.localsiri.R;
 import tud.kom.dss6.localsiri.knowuraddress.KnowYourAddress;
 import android.app.ActionBar;
@@ -45,30 +46,36 @@ public class LocationMain extends Activity {
 
 				switch (position) {
 				case 0:
-					startActivity(new Intent(LocationMain.this, HomeScreen.class));
+					startActivity(new Intent(LocationMain.this,
+							AskSiri.class));
 					break;
-				case 1: 
-					startActivity(new Intent(LocationMain.this,KnowYourAddress.class));
+				case 1:
+					startActivity(new Intent(LocationMain.this,
+							MyTopics.class));
 					break;
 				case 2:
-					Intent mKnowYourAddress = new Intent(LocationMain.this,
-							KnowYourAddress.class);
-					startActivity(mKnowYourAddress);
-
+					startActivity(new Intent(LocationMain.this,
+							KnowYourAddress.class));
 					break;
 				case 3:
-					Intent settings = new Intent(LocationMain.this,
-							Settings.class);
-					startActivity(settings);
+					Toast.makeText(LocationMain.this, "Trace under dev",
+							Toast.LENGTH_SHORT).show();
 					break;
 				case 4:
+					Toast.makeText(LocationMain.this, "Monitor under dev",
+							Toast.LENGTH_SHORT).show();
+					break;
+				case 5:
+					startActivity(new Intent(LocationMain.this, Settings.class));
+					break;
+				case 6:
 					Intent startIntent = new Intent(LocationMain.this,
 							LocalSiriService.class);
 					startIntent
 							.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
 					startService(startIntent);
 					break;
-				case 5:
+				case 7:
 					Intent stopIntent = new Intent(LocationMain.this,
 							LocalSiriService.class);
 					stopIntent

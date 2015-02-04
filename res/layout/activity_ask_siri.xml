@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp" >
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="5dp" >
+
+        <ImageButton
+            android:id="@+id/Query"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#FFF9C4"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_home_ask_siri"
+            android:text="@string/Query" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ImageButton
+            android:id="@+id/RelTopics"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#FFF9C4"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_home_relevant_topics"
+            android:text="@string/RelTopics" />
+    </TableRow>
+
+</TableLayout>

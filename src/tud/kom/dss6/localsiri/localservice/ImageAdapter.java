@@ -41,6 +41,8 @@ public class ImageAdapter extends BaseAdapter {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		View gridView;
+		TextView textView;
+		ImageView imageView;
 
 		if (convertView == null) { // if it's not recycled, initialize some
 									// attributes
@@ -48,38 +50,30 @@ public class ImageAdapter extends BaseAdapter {
 
 			gridView = inflater.inflate(R.layout.grid_view_items, null);
 
-			ImageView imageView = (ImageView) gridView
-					.findViewById(R.id.grid_image);
-			TextView textView = (TextView) gridView
-					.findViewById(R.id.grid_label);
-
-			textView.setText(mLabelIds[position]);
-
-			imageView.setImageResource(mImageIds[position]);
-			// imageView.setLayoutParams(new GridView.LayoutParams(600, 600));
-			imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-			imageView.setPadding(8, 8, 8, 8);
-
 		} else {
 			gridView = (View) convertView;
 		}
+		
+		imageView = (ImageView) gridView.findViewById(R.id.grid_image);
+		textView = (TextView) gridView.findViewById(R.id.grid_label);
 
+		textView.setText(mLabelIds[position]);
+
+		imageView.setImageResource(mImageIds[position]);
+		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		imageView.setPadding(8, 8, 8, 8);
 		return gridView;
 	}
 
 	// references to our images
-	private Integer[] mImageIds = { 
-			R.drawable.ic_home_ask,
-			R.drawable.ic_home_trace,
-			R.drawable.ic_home_location,
-			R.drawable.ic_home_setting, 
-			R.drawable.ic_home_start,
+	private Integer[] mImageIds = { R.drawable.ic_home_ask,
+			R.drawable.ic_home_mytopics, R.drawable.ic_home_location,
+			R.drawable.ic_home_trace, R.drawable.ic_home_monitor,
+			R.drawable.ic_home_setting, R.drawable.ic_home_start,
 			R.drawable.ic_home_stop };
 
 	// references to our images
-	private Integer[] mLabelIds = { 
-			R.string.localsiri,
-			R.string.trace,
-			R.string.location, R.string.settings,
-			R.string.start, R.string.stop };
+	private Integer[] mLabelIds = { R.string.localsiri, R.string.my_topics,
+			R.string.location, R.string.trace, R.string.monitor,
+			R.string.settings, R.string.start, R.string.stop };
 }

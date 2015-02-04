@@ -62,7 +62,7 @@
             android:title="Use Wi-Fi only" />
 
         <ListPreference
-            android:defaultValue="none"
+            android:defaultValue="normal"
             android:dependency="@string/pref_key_wifi_only"
             android:entries="@array/uploadChoice"
             android:entryValues="@array/uploadChoiceValues"

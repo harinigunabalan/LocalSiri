@@ -93,7 +93,7 @@
 
         <!-- Local Siri Activities -->
         <activity
-            android:name="tud.kom.dss6.localsiri.HomeScreen"
+            android:name="tud.kom.dss6.localsiri.AskSiri"
             android:configChanges="orientation|screenLayout|screenSize"
             android:label="@string/app_name"
             android:parentActivityName="tud.kom.dss6.localsiri.localservice.LocationMain"
@@ -106,7 +106,6 @@
             <!-- Notification Intent -->
             <intent-filter>
                 <action android:name="dss6.komlab.tu.localsiri.IBMPushNotification" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <!-- Push Settings End -->
@@ -116,7 +115,7 @@
             android:name="tud.kom.dss6.localsiri.MyTopics"
             android:configChanges="orientation|screenLayout|screenSize"
             android:label="@string/MyTopics"
-            android:parentActivityName="tud.kom.dss6.localsiri.HomeScreen"
+            android:parentActivityName="tud.kom.dss6.localsiri.AskSiri"
             android:theme="@style/CustomActionBarTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -126,7 +125,7 @@
             android:name="tud.kom.dss6.localsiri.askQuery"
             android:configChanges="orientation|screenLayout|screenSize"
             android:label="@string/Query"
-            android:parentActivityName="tud.kom.dss6.localsiri.HomeScreen"
+            android:parentActivityName="tud.kom.dss6.localsiri.AskSiri"
             android:theme="@style/CustomActionBarTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -136,7 +135,7 @@
             android:name="tud.kom.dss6.localsiri.RelTopics"
             android:configChanges="orientation|screenLayout|screenSize"
             android:label="@string/RelTopics"
-            android:parentActivityName="tud.kom.dss6.localsiri.HomeScreen"
+            android:parentActivityName="tud.kom.dss6.localsiri.AskSiri"
             android:theme="@style/CustomActionBarTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -146,7 +145,7 @@
             android:name="tud.kom.dss6.localsiri.viewCity"
             android:configChanges="orientation|screenLayout|screenSize"
             android:label="@string/City"
-            android:parentActivityName="tud.kom.dss6.localsiri.HomeScreen"
+            android:parentActivityName="tud.kom.dss6.localsiri.AskSiri"
             android:theme="@style/CustomActionBarTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

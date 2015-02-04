@@ -11,7 +11,8 @@ import tud.kom.dss6.localsiri.R;
 import tud.kom.dss6.localsiri.IBMDataObjects.CurrentPosition;
 import tud.kom.dss6.localsiri.localservice.collection.CriteriaSelector;
 import tud.kom.dss6.localsiri.localservice.collection.Optimizer;
-import android.app.Activity;
+import tud.kom.dss6.localsiri.monitor.MonitorAdaption;
+import tud.kom.dss6.localsiri.monitor.PreferenceLocation;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -27,6 +28,7 @@ import android.location.LocationManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -41,7 +43,7 @@ import com.google.android.gms.location.LocationServices;
 public class LocalSiriService extends Service implements ConnectionCallbacks,
 		OnConnectionFailedListener, LocationListener {
 
-	private static final String TAG = LocalSiriService.class.getSimpleName(); 
+	private static final String TAG = LocalSiriService.class.getSimpleName();
 
 	protected GoogleApiClient mGoogleApiClient;
 
@@ -52,7 +54,6 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 	protected Boolean mRequestingLocationUpdates;
 	protected boolean mServiceStatus;
 
-	
 	LocalSiriApplication lsApplication;
 	List<CurrentPosition> currentPositionList;
 
@@ -74,10 +75,10 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		batteryStatus = this.registerReceiver(null, ifilter);
 
 		buildGoogleApiClient();
-		
-        /* Use application class to maintain global state. */
+
+		/* Use application class to maintain global state. */
 		lsApplication = (LocalSiriApplication) getApplication();
-		currentPositionList = lsApplication.getCurrentPositionList(); 
+		currentPositionList = lsApplication.getCurrentPositionList();
 
 	}
 
@@ -105,6 +106,12 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		Log.i(TAG, "Updating Listener: \n Initial Interval: "
 				+ mLocationRequest.getInterval() + "\nDesired Interval: "
 				+ optimizer.getFrequency());
+
+		if (optimizer.getFrequency() == Constants.FREQUENCY_LEVEL.DEAD) {
+			Log.i(TAG, "Deactivating Service. Reason: Battery about to Die");
+			passivate();
+			return;
+		}
 
 		mLocationRequest.setInterval(optimizer.getFrequency());
 		mLocationRequest.setPriority(optimizer.getPriority());
@@ -140,11 +147,6 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 			PendingIntent pplayIntent = PendingIntent.getService(this, 0,
 					playIntent, 0);
 
-			Intent nextIntent = new Intent(this, LocalSiriService.class);
-			nextIntent.setAction(Constants.ACTION.NEXT_ACTION);
-			PendingIntent pnextIntent = PendingIntent.getService(this, 0,
-					nextIntent, 0);
-
 			Bitmap icon = BitmapFactory.decodeResource(getResources(),
 					R.drawable.ic_notification);
 
@@ -161,9 +163,7 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 					.addAction(android.R.drawable.btn_star_big_off,
 							"Passivate", ppreviousIntent)
 					.addAction(android.R.drawable.ic_menu_help, "Activate",
-							pplayIntent)
-					.addAction(android.R.drawable.ic_menu_edit, "Settings",
-							pnextIntent).build();
+							pplayIntent).build();
 			startForeground(Constants.NOTIFICATION_ID.FOREGROUND_SERVICE,
 					notification);
 
@@ -175,8 +175,6 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		} else if (intent.getAction().equals(Constants.ACTION.PLAY_ACTION)) {
 			Log.i(TAG, "Re-activate Service");
 			activate();
-		} else if (intent.getAction().equals(Constants.ACTION.NEXT_ACTION)) {
-			Log.i(TAG, "Clicked Next");
 		} else if (intent.getAction().equals(
 				Constants.ACTION.STOPFOREGROUND_ACTION)) {
 			Log.i(TAG, "Received Stop Foreground Intent");
@@ -258,22 +256,50 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		}
 	}
 
+	/**
+	 * <p>
+	 * <b>moitorContext() - </b> Method that verifies the current context
+	 * details
+	 * </p>
+	 * We check for the following, <li>Battery Level</li><li>User Preferences</li>
+	 */
 	public void monitorContext() {
 
+		
+
+		MonitorAdaption monitorAdaption = new MonitorAdaption();
+		PreferenceLocation preferenceLocation = new PreferenceLocation();
+		SharedPreferences sharedPref = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		
+		
 		int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 		int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+		preferenceLocation.mBatteryLevel = (level * 100) / scale;
+		
+		Log.e("Test", "Battery Level: " + preferenceLocation.mBatteryLevel);
 
-		int batteryLevel = (level * 100) / scale;
-		Log.e("Test", "Battery Level: " + batteryLevel);
+		
+		preferenceLocation.isIntelligenceOverridden = sharedPref.getBoolean(
+				Constants.SETTINGS.pref_key_intelligent_optimizer, true);
+		preferenceLocation.mUserScheme = Constants.SETTINGS.pref_key_intelligent_optimizer;
+		if (!(preferenceLocation.isIntelligenceOverridden)) {
+			preferenceLocation.mUserScheme = sharedPref.getString(
+					Constants.SETTINGS.pref_key_location_scheme, getResources()
+							.getStringArray(R.array.locationChoiceValues)[0]);
+		}
 
-		CriteriaSelector criteriaSelector = new CriteriaSelector();
-		Optimizer optimizer = criteriaSelector
-				.getOptimizedCriteria(batteryLevel);
+		CriteriaSelector criteriaSelector = new CriteriaSelector(preferenceLocation);
+		Optimizer optimizer = criteriaSelector.getOptimizedCriteria();
 
-		if (optimizer.getFrequency() != mLocationRequest.getInterval()) {
+		boolean isAdapted = (optimizer.getFrequency() != mLocationRequest.getInterval())?true:false;  
+		if (isAdapted) {
+			Log.i("Test", "Adapting to Context");
 			updateLocationRequest(optimizer);
+			monitorAdaption.updateMonitor(optimizer, mLocationRequest, preferenceLocation);
 		} else {
 			Log.i("Test", "No need adaption");
+			monitorAdaption.updateMonitor(optimizer, mLocationRequest, preferenceLocation);
 		}
 	}
 
@@ -310,38 +336,42 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 
 	@Override
 	public void onLocationChanged(Location location) {
-		
+
 		Context context = getApplicationContext();
-		SharedPreferences sharedpreferences = context.getSharedPreferences(LocalSiriApplication.PREFERENCES, MODE_PRIVATE);
+		SharedPreferences sharedpreferences = context.getSharedPreferences(
+				LocalSiriApplication.PREFERENCES, MODE_PRIVATE);
 		boolean success = false;
 		int mode = 2; // set the mode as 0-WiFi only, 1-Optimized 3G and
 						// 2-Normal 3G
 		int RECORD_COUNTER;
-		RECORD_COUNTER = (mode == 1)? 12 : 6;
-		uploadCounter = sharedpreferences.getInt(LocalSiriApplication.UPLOAD_COUNTER, 0);
+		RECORD_COUNTER = (mode == 1) ? 12 : 6;
+		uploadCounter = sharedpreferences.getInt(
+				LocalSiriApplication.UPLOAD_COUNTER, 0);
 		RECORD_COUNTER = (mode == 1) ? 12 : 6;
 		uploadCounter = uploadCounter + 1;
 		// edit shared Preference
 		Editor editor = sharedpreferences.edit();
-	    editor.putInt(LocalSiriApplication.UPLOAD_COUNTER, uploadCounter);
-	    editor.commit(); 
-	    
+		editor.putInt(LocalSiriApplication.UPLOAD_COUNTER, uploadCounter);
+		editor.commit();
+
 		mCurrentLocation = location;
 		addGeoLocation(mCurrentLocation);
-		monitorContext();		
+		monitorContext();
 
 		if (uploadCounter >= RECORD_COUNTER) {
 
-			UploadService uploadService = new UploadService(this, currentPositionList);
+			UploadService uploadService = new UploadService(this,
+					currentPositionList);
 			success = uploadService.uploadOptimizer(mode);
-			
-			if(success == true){
-				uploadCounter = 0;								
-			    editor.putInt(LocalSiriApplication.UPLOAD_COUNTER, uploadCounter);
-			    editor.putString(LocalSiriApplication.LAST_UPLOAD, "");
-			    editor.commit();
+
+			if (success == true) {
+				uploadCounter = 0;
+				editor.putInt(LocalSiriApplication.UPLOAD_COUNTER,
+						uploadCounter);
+				editor.putString(LocalSiriApplication.LAST_UPLOAD, "");
+				editor.commit();
 				// TODO: clear local SQLite DB
-			}				
+			}
 
 			if (success == true) {
 				uploadCounter = 0;
