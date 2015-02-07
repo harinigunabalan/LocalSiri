@@ -3,6 +3,7 @@
  */
 package tud.kom.dss6.localsiri.localservice.collection;
 
+import android.util.Log;
 import tud.kom.dss6.localsiri.localservice.Constants;
 import tud.kom.dss6.localsiri.monitor.PreferenceLocation;
 
@@ -29,7 +30,6 @@ public class CriteriaSelector {
 	 *            user has overridden what is the chosen scheme</li>
 	 */
 	public CriteriaSelector(PreferenceLocation preferenceLocation) {
-		super();
 		this.batteryLevel = preferenceLocation.mBatteryLevel;
 		this.isIntelligenceOverridden = preferenceLocation.isIntelligenceOverridden;
 		this.userScheme = preferenceLocation.mUserScheme;
@@ -47,10 +47,13 @@ public class CriteriaSelector {
 	 */
 	public Optimizer getOptimizedCriteria() {
 
+		Log.d("Criteria", "Inside getOC:" + isIntelligenceOverridden);
+
 		if (!isIntelligenceOverridden) {
 
 			/* BATTERY LEVEL - "HIGH" */
 			if (batteryLevel > Constants.BATTERY_LEVEL.HIGH) {
+				Log.d("Test", "Entered High");
 				optimizer.setFrequency(Constants.FREQUENCY_LEVEL.HIGH);
 				optimizer.setPriority(Constants.PRIORITY_LEVEL.HIGH);
 			}
@@ -58,24 +61,32 @@ public class CriteriaSelector {
 			/* BATTERY LEVEL - "MEDIUM" */
 			else if (batteryLevel > Constants.BATTERY_LEVEL.MEDIUM
 					&& batteryLevel <= Constants.BATTERY_LEVEL.HIGH) {
+				Log.d("Criteria", "Entered Medium");
 				optimizer.setFrequency(Constants.FREQUENCY_LEVEL.MEDIUM);
 				optimizer.setPriority(Constants.PRIORITY_LEVEL.MEDIUM);
 			}
 
 			/* BATTERY LEVEL - "LOW" */
 			else if (batteryLevel <= Constants.BATTERY_LEVEL.MEDIUM) {
+				Log.d("Criteria", "Checking Moderate Mode");
 				mModerateMode();
 			}
-
+			Log.d("Criteria", "Returning Op obj");
 			return optimizer;
 		}
 
+		Log.d("Criteria", "Then continuing");
 		switch (userScheme) {
 		case "moderate":
+			Log.d("Test", "Entered Moderate");
 			mModerateMode();
 			break;
 		case "lazy":
+			Log.d("Test", "Lazy");
 			mLazyMode();
+			break;
+		default:
+			mModerateMode();
 			break;
 		}
 		return optimizer;
@@ -87,6 +98,7 @@ public class CriteriaSelector {
 	public void mModerateMode() {
 		/* BATTERY LEVEL - "LOW" */
 		if (batteryLevel > Constants.BATTERY_LEVEL.LOW) {
+			Log.d("Test", "Inside Moderate");
 			optimizer.setFrequency(Constants.FREQUENCY_LEVEL.LOW);
 			optimizer.setPriority(Constants.PRIORITY_LEVEL.LOW);
 		}
@@ -103,6 +115,7 @@ public class CriteriaSelector {
 	public void mLazyMode() {
 		/* BATTERY LEVEL - "CRITICAL" */
 		if (batteryLevel > Constants.BATTERY_LEVEL.CRITICAL) {
+			Log.d("Test", "Inside Lazy");
 			optimizer.setFrequency(Constants.FREQUENCY_LEVEL.CRITICAL);
 			optimizer.setPriority(Constants.PRIORITY_LEVEL.CRITICAL);
 		}

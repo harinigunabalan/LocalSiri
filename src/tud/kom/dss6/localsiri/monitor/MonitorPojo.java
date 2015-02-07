@@ -2,14 +2,30 @@ package tud.kom.dss6.localsiri.monitor;
 
 public class MonitorPojo {
 
+	String mDate;
 	int mBatteryLevel;
 	String mUserPreference_Location;
 	String mUserPreference_Upload;
 	int mLocationFrequency;
 	int mLocationFrequency_Adapted;
-	int mLocationMode;
-	int mLocationMode_Adapted;
+	String mLocationMode;
+	String mLocationMode_Adapted;
 	int mUploadMode;
+
+	/**
+	 * @return the mDate
+	 */
+	public String getmDate() {
+		return mDate;
+	}
+
+	/**
+	 * @param mDate
+	 *            the mDate to set
+	 */
+	public void setmDate(String mDate) {
+		this.mDate = mDate;
+	}
 
 	/**
 	 * @return the mBatteryLevel
@@ -89,7 +105,7 @@ public class MonitorPojo {
 	/**
 	 * @return the mLocationMode
 	 */
-	public int getmLocationMode() {
+	public String getmLocationMode() {
 		return mLocationMode;
 	}
 
@@ -97,14 +113,14 @@ public class MonitorPojo {
 	 * @param mLocationMode
 	 *            the mLocationMode to set
 	 */
-	public void setmLocationMode(int mLocationMode) {
+	public void setmLocationMode(String mLocationMode) {
 		this.mLocationMode = mLocationMode;
 	}
 
 	/**
 	 * @return the mLocationMode_Adapted
 	 */
-	public int getmLocationMode_Adapted() {
+	public String getmLocationMode_Adapted() {
 		return mLocationMode_Adapted;
 	}
 
@@ -112,7 +128,7 @@ public class MonitorPojo {
 	 * @param mLocationMode_Adapted
 	 *            the mLocationMode_Adapted to set
 	 */
-	public void setmLocationMode_Adapted(int mLocationMode_Adapted) {
+	public void setmLocationMode_Adapted(String mLocationMode_Adapted) {
 		this.mLocationMode_Adapted = mLocationMode_Adapted;
 	}
 
@@ -138,14 +154,14 @@ public class MonitorPojo {
 	 */
 	@Override
 	public String toString() {
-		return "MonitorPojo [mBatteryLevel=" + mBatteryLevel
-				+ ", mUserPreference_Location=" + mUserPreference_Location
-				+ ", mUserPreference_Upload=" + mUserPreference_Upload
-				+ ", mLocationFrequency=" + mLocationFrequency
-				+ ", mLocationFrequency_Adapted=" + mLocationFrequency_Adapted
-				+ ", mLocationMode=" + mLocationMode
-				+ ", mLocationMode_Adapted=" + mLocationMode_Adapted
-				+ ", mUploadMode=" + mUploadMode + "]";
+		return "MonitorPojo [mDate=" + mDate + ", mBatteryLevel="
+				+ mBatteryLevel + ", mUserPreference_Location="
+				+ mUserPreference_Location + ", mUserPreference_Upload="
+				+ mUserPreference_Upload + ", mLocationFrequency="
+				+ mLocationFrequency + ", mLocationFrequency_Adapted="
+				+ mLocationFrequency_Adapted + ", mLocationMode="
+				+ mLocationMode + ", mLocationMode_Adapted="
+				+ mLocationMode_Adapted + ", mUploadMode=" + mUploadMode + "]";
 	}
 
 }

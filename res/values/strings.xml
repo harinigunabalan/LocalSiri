@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">LocalSiri</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="add_geoPoints">Record Current Location</string>
     <string name="display_geoPint">Display Saved Locations</string>
@@ -28,7 +27,6 @@
     <string name="main_empty_list">There are no posts.</string>
 
     <!-- Home Screen Grid View Lables -->
-    
     <string name="localsiri">Local Siri</string>
     <string name="trace">Trace Back</string>
     <string name="location">Know Your Address</string>
@@ -36,9 +34,8 @@
     <string name="start">Start Service</string>
     <string name="stop">Stop Service</string>
     <string name="title_activity_know_your_address">KnowYourAddress</string>
-    
-    
-    <!-- Preference(Settings) Screen - Default Shared Prefereces Key-->
+
+    <!-- Preference(Settings) Screen - Default Shared Prefereces Key -->
     <string name="pref_key_do_not_disturb">pref_key_do_not_disturb</string>
     <string name="pref_key_master_service">pref_key_master_service</string>
     <string name="pref_key_temporary_service">pref_key_temporary_service</string>
@@ -48,7 +45,5 @@
     <string name="pref_key_upload_scheme">pref_key_upload_scheme Service</string>
     <string name="my_topics">My Topics</string>
     <string name="monitor">Monitor</string>
-    
-    
 
 </resources>

@@ -219,7 +219,7 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		}
 	}
 
-	private String getDateTime() {
+	public String getDateTime() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 		Date date = new Date();
@@ -265,41 +265,47 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 	 */
 	public void monitorContext() {
 
-		
-
 		MonitorAdaption monitorAdaption = new MonitorAdaption();
 		PreferenceLocation preferenceLocation = new PreferenceLocation();
 		SharedPreferences sharedPref = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		
-		
+
 		int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 		int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 		preferenceLocation.mBatteryLevel = (level * 100) / scale;
-		
+
 		Log.e("Test", "Battery Level: " + preferenceLocation.mBatteryLevel);
 
-		
-		preferenceLocation.isIntelligenceOverridden = sharedPref.getBoolean(
-				Constants.SETTINGS.pref_key_intelligent_optimizer, true);
+		preferenceLocation.isIntelligenceOverridden = (sharedPref.getBoolean(
+				Constants.SETTINGS.pref_key_intelligent_optimizer, true) == true) ? false
+				: true;
+
+		Log.e("Criteria", "Shareed: "
+				+ preferenceLocation.isIntelligenceOverridden);
 		preferenceLocation.mUserScheme = Constants.SETTINGS.pref_key_intelligent_optimizer;
-		if (!(preferenceLocation.isIntelligenceOverridden)) {
+
+		if ((preferenceLocation.isIntelligenceOverridden)) {
+			Log.i("Test", "Intelligent Optimizer is Overridden");
 			preferenceLocation.mUserScheme = sharedPref.getString(
 					Constants.SETTINGS.pref_key_location_scheme, getResources()
 							.getStringArray(R.array.locationChoiceValues)[0]);
 		}
 
-		CriteriaSelector criteriaSelector = new CriteriaSelector(preferenceLocation);
+		CriteriaSelector criteriaSelector = new CriteriaSelector(
+				preferenceLocation);
 		Optimizer optimizer = criteriaSelector.getOptimizedCriteria();
 
-		boolean isAdapted = (optimizer.getFrequency() != mLocationRequest.getInterval())?true:false;  
+		boolean isAdapted = (optimizer.getFrequency() != mLocationRequest
+				.getInterval()) ? true : false;
 		if (isAdapted) {
 			Log.i("Test", "Adapting to Context");
 			updateLocationRequest(optimizer);
-			monitorAdaption.updateMonitor(optimizer, mLocationRequest, preferenceLocation);
+			monitorAdaption.updateMonitor(optimizer, mLocationRequest,
+					preferenceLocation);
 		} else {
 			Log.i("Test", "No need adaption");
-			monitorAdaption.updateMonitor(optimizer, mLocationRequest, preferenceLocation);
+			monitorAdaption.updateMonitor(optimizer, mLocationRequest,
+					preferenceLocation);
 		}
 	}
 
