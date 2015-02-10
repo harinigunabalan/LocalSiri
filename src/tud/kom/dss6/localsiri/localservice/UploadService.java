@@ -237,7 +237,7 @@ public class UploadService {
 			Log.e(CLASS_NAME, "Updating Current Position record");
 			current.setDate(hashmap.get(LocationMain.KEY_DATE));
 			Log.e(CLASS_NAME, "Device MAC before current location update: " + macAddress);
-			current.setMac(macAddress);
+			//current.setMac(macAddress);
 			current.setLatitude(hashmap.get(LocationMain.KEY_LATITUDE));
 			current.setLongitude(hashmap.get(LocationMain.KEY_LONGITUDE));
 			uploadPositionToMobileCloud(current);
