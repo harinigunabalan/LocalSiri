@@ -84,8 +84,8 @@ public class Settings extends PreferenceActivity implements
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-		case R.id.menu_save:
-			startActivity(new Intent(this, LocationMain.class));
+		case R.id.menu_settings:
+			startActivity(new Intent(this, Settings.class));
 			return true;
 		}
 		return false;

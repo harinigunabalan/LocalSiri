@@ -196,7 +196,7 @@ public class askQuery  extends Activity {
 	                    });   
 	            		// Back into Topic Save
 	            		launchMyTopics();	           
-	            		updateOtherDevices();
+	            		updateOtherDevices(topic);
             		} 
             		return null; 
             	} 
@@ -264,7 +264,7 @@ public class askQuery  extends Activity {
              	} );         
     }  
     
-    private void updateOtherDevices() {
+    private void updateOtherDevices(Topic topic) {
 
 		// initialize and retrieve an instance of the IBM CloudCode service
     	Log.e(CLASS_NAME, "Inside updateOtherDevices 1");
@@ -273,7 +273,8 @@ public class askQuery  extends Activity {
 		JSONObject jsonObj = new JSONObject();
 		Log.e(CLASS_NAME, "Inside updateOtherDevices 2");
 		try {
-			jsonObj.put("key1", "value1");
+			jsonObj.put("topicLatitude", topic.getLatitude());
+			jsonObj.put("topicLongitude", topic.getLongitude());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

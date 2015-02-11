@@ -1,18 +1,17 @@
 package tud.kom.dss6.localsiri.localservice;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import tud.kom.dss6.localsiri.monitor.MonitorPojo;
 import android.content.ContentValues;
 import android.content.Context;
-
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import tud.kom.dss6.localsiri.monitor.MonitorPojo;
 
 /**
  * Created by Hariharan on 11/19/2014.
@@ -34,12 +33,15 @@ public class DBAdapter extends SQLiteOpenHelper {
 			+ "mUserPreference_Location TEXT, " + "mLocationFrequency TEXT, "
 			+ "mLocationFrequency_Adapted TEXT, " + "mLocationMode TEXT, "
 			+ "mLocationMode_Adapted TEXT);";
-	
+
 	private static final String DB_TABLE_READ_ALL_GEOPOINTS = "SELECT * FROM "
 			+ DB_TABLE_NAME_LOCATION + " ORDER BY 1 DESC";
 
 	private static final String DB_TABLE_READ_LATEST_GEOPOINT = "SELECT * FROM "
 			+ DB_TABLE_NAME_LOCATION + " ORDER BY 1 DESC LIMIT 1";
+
+	private static final String DB_TABLE_READ_MONITORED_VALUES = "SELECT * FROM "
+			+ DB_TABLE_NAME_MONITOR + " ORDER BY 1 DESC";
 
 	public static DBAdapter getInstance(Context context) {
 
@@ -164,4 +166,71 @@ public class DBAdapter extends SQLiteOpenHelper {
 		DB_w.close();
 
 	}
+
+	public ArrayList<HashMap<String, String>> getMonitorValues() {
+
+		ArrayList<HashMap<String, String>> monitorArrayList = new ArrayList<HashMap<String, String>>();
+		SQLiteDatabase DB_r = this.getReadableDatabase();
+
+		Cursor cursor = DB_r.rawQuery(DB_TABLE_READ_MONITORED_VALUES, null);
+
+		if (cursor.moveToFirst()) {
+
+			do {
+				HashMap<String, String> monitorValue = new HashMap<String, String>();
+
+				monitorValue.put("Date", cursor.getString(0));
+				monitorValue.put("BatteryLevel", cursor.getString(1));
+				monitorValue
+						.put("UserPreference_Location", cursor.getString(2));
+				monitorValue.put("LocationFrequency", cursor.getString(3));
+				monitorValue.put("LocationFrequency_Adapted",
+						cursor.getString(4));
+				monitorValue.put("LocationMode", cursor.getString(5));
+				monitorValue.put("LocationMode_Adapted", cursor.getString(6));
+
+				monitorArrayList.add(monitorValue);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		DB_r.close();
+
+		return monitorArrayList;
+	}
+
+	public ArrayList<HashMap<String, String>> getMonitorValues(int count) {
+
+		final String DB_TABLE_READ_MONITORED_VALUES_COUNT = "SELECT * FROM "
+				+ DB_TABLE_NAME_MONITOR + " ORDER BY 1 DESC LIMIT " + count;
+
+		ArrayList<HashMap<String, String>> monitorArrayList = new ArrayList<HashMap<String, String>>();
+		SQLiteDatabase DB_r = this.getReadableDatabase();
+
+		Cursor cursor = DB_r.rawQuery(DB_TABLE_READ_MONITORED_VALUES_COUNT,
+				null);
+
+		if (cursor.moveToFirst()) {
+
+			do {
+				HashMap<String, String> monitorValue = new HashMap<String, String>();
+
+				monitorValue.put("Date", cursor.getString(0));
+				monitorValue.put("BatteryLevel", cursor.getString(1));
+				monitorValue
+						.put("UserPreference_Location", cursor.getString(2));
+				monitorValue.put("LocationFrequency", cursor.getString(3));
+				monitorValue.put("LocationFrequency_Adapted",
+						cursor.getString(4));
+				monitorValue.put("LocationMode", cursor.getString(5));
+				monitorValue.put("LocationMode_Adapted", cursor.getString(6));
+
+				monitorArrayList.add(monitorValue);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		DB_r.close();
+
+		return monitorArrayList;
+	}
+
 }

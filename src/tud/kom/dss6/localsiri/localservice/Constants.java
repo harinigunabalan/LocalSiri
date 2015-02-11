@@ -38,6 +38,11 @@ public class Constants {
 		public static final int DEAD = 0;
 	}
 
+	/**
+	 * 
+	 * FREQUENCY_LEVEL in milliseconds
+	 * 
+	 */
 	public interface FREQUENCY_LEVEL {
 		public static final int HIGH = 10000;
 		public static final int MEDIUM = 15000;

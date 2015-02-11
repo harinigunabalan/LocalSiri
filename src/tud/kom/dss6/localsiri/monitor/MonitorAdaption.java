@@ -25,35 +25,34 @@ public class MonitorAdaption {
 		monitorPojo.setmBatteryLevel(preferenceLocation.mBatteryLevel);
 		monitorPojo.setmLocationFrequency((int) mLocationRequest.getInterval());
 		monitorPojo.setmLocationFrequency_Adapted(optimizer.getFrequency());
+		monitorPojo.setmUserPreference_Location(preferenceLocation.mUserScheme);
 
 		switch (mLocationRequest.getPriority()) {
 		case Constants.PRIORITY_LEVEL.HIGH:
-			monitorPojo.setmLocationMode("PRIORITY_HIGH_ACCURACY");
+			monitorPojo.setmLocationMode("PRIORITY_HIGH_ACCURACY");break;
 		case Constants.PRIORITY_LEVEL.MEDIUM:
-			monitorPojo.setmLocationMode("PRIORITY_BALANCED_POWER_ACCURACY");
+			monitorPojo.setmLocationMode("PRIORITY_BALANCED_POWER_ACCURACY");break;
 		case Constants.PRIORITY_LEVEL.LOW:
-			monitorPojo.setmLocationMode("PRIORITY_LOW_POWER");
+			monitorPojo.setmLocationMode("PRIORITY_LOW_POWER");break;
 		case Constants.PRIORITY_LEVEL.CRITICAL:
-			monitorPojo.setmLocationMode("PRIORITY_NO_POWER");
+			monitorPojo.setmLocationMode("PRIORITY_NO_POWER");break;
 		case Constants.PRIORITY_LEVEL.DEAD:
-			monitorPojo.setmLocationMode("KILL THE SERVICE");
+			monitorPojo.setmLocationMode("KILL THE SERVICE");break;
 		}
 
 		switch (optimizer.getPriority()) {
 		case Constants.PRIORITY_LEVEL.HIGH:
-			monitorPojo.setmLocationMode_Adapted("PRIORITY_HIGH_ACCURACY");
+			monitorPojo.setmLocationMode_Adapted("PRIORITY_HIGH_ACCURACY");break;
 		case Constants.PRIORITY_LEVEL.MEDIUM:
 			monitorPojo
-					.setmLocationMode_Adapted("PRIORITY_BALANCED_POWER_ACCURACY");
+					.setmLocationMode_Adapted("PRIORITY_BALANCED_POWER_ACCURACY");break;
 		case Constants.PRIORITY_LEVEL.LOW:
-			monitorPojo.setmLocationMode_Adapted("PRIORITY_LOW_POWER");
+			monitorPojo.setmLocationMode_Adapted("PRIORITY_LOW_POWER");break;
 		case Constants.PRIORITY_LEVEL.CRITICAL:
-			monitorPojo.setmLocationMode_Adapted("PRIORITY_NO_POWER");
+			monitorPojo.setmLocationMode_Adapted("PRIORITY_NO_POWER");break;
 		case Constants.PRIORITY_LEVEL.DEAD:
-			monitorPojo.setmLocationMode_Adapted("KILL THE SERVICE");
+			monitorPojo.setmLocationMode_Adapted("KILL THE SERVICE");break;
 		}
-
-		monitorPojo.setmUserPreference_Location(preferenceLocation.mUserScheme);
 
 		Log.i("MONITOR:", monitorPojo.toString());
 

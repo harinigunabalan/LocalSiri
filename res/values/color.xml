@@ -3,4 +3,10 @@
     <color name="actionbar">#BF360C</color>
     <color name="actionbar_text">#fafafa</color>
     <color name="accentColor">#E8EAF6</color>  
+    
+    <color name="batteryline">#FFBB33</color>
+    <color name="frequencyLine">#D50000</color>
+    <color name="graphbackground">#8BC34A</color>  
+    
+    
 </resources>

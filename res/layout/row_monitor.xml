@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:padding="3dp" >
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1.5"
+            android:background="#ff4d98c1"
+            android:padding="5dp"
+            android:text="@string/date"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/date_field"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:background="#FF5252"
+            android:gravity="start"
+            android:padding="5dp"
+            android:text="@string/date"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/BatteryLevel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="3"
+            android:background="#ff4d98c1"
+            android:padding="5dp"
+            android:text="Battery Level:"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/batteryLevel_field"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#FF5252"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dp"
+            android:text="50"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        
+
+        <TextView
+            android:id="@+id/mUserPreference_Location"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:background="#ff4d98c1"
+            android:gravity="start"
+            android:padding="5dp"
+            android:text="Self Optimize:"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mUserPreference_field"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:background="#000"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dp"
+            android:text="Yes"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/mLocationFrequency"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:background="#ff4d98c1"
+            android:gravity="start"
+            android:padding="5dp"
+            android:text="Frequency:"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mLocationFrequency_field"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:background="#000"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dp"
+            android:text="60"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mLocationFrequency_Adapted"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:background="#ff4d98c1"
+            android:gravity="start"
+            android:padding="5dp"
+            android:text="Freq Adapted:"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mLocationFrequency_Adapted_field"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:background="#000"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dp"
+            android:text="70"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/mLocationPriority"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:background="#ff4d98c1"
+            android:gravity="start"
+            android:padding="5dp"
+            android:text="Priority:"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mLocationPriority_field"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:background="#000"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dp"
+            android:text="60"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        <TextView
+            android:id="@+id/mLocationPriority_Adapted"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:background="#ff4d98c1"
+            android:gravity="start"
+            android:padding="5dp"
+            android:text="Priority Adapted:"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/mLocationPriority_Adapted_field"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:background="#000"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dp"
+            android:text="70"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+    </TableRow>
+
+</TableLayout>

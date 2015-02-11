@@ -2,15 +2,15 @@ package tud.kom.dss6.localsiri.monitor;
 
 public class MonitorPojo {
 
-	String mDate;
-	int mBatteryLevel;
-	String mUserPreference_Location;
-	String mUserPreference_Upload;
-	int mLocationFrequency;
-	int mLocationFrequency_Adapted;
-	String mLocationMode;
-	String mLocationMode_Adapted;
-	int mUploadMode;
+	public String mDate;
+	public int mBatteryLevel;
+	public String mUserPreference_Location;
+	public String mUserPreference_Upload;
+	public int mLocationFrequency;
+	public int mLocationFrequency_Adapted;
+	public String mLocationMode;
+	public String mLocationMode_Adapted;
+	public int mUploadMode;
 
 	/**
 	 * @return the mDate

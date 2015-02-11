@@ -45,5 +45,16 @@
     <string name="pref_key_upload_scheme">pref_key_upload_scheme Service</string>
     <string name="my_topics">My Topics</string>
     <string name="monitor">Monitor</string>
+    <string name="title_activity_monitor">Monitor</string>
+    <string name="title_activity_monitor_graph">Monitor Graph</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <!-- Graph -->
+    <string name="empty">&lt;Touch a point on graph&gt;</string>
+    <string name="battery_legend">Battery</string>
+    <string name="frequency_legend">Frequency</string>
+    <string name="reload_graph">Reload Graph</string>
+    
+    
 
 </resources>

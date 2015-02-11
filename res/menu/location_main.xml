@@ -3,7 +3,7 @@
     tools:context="kom.dss6.localservice.LocationMain" >
 
     <item
-        android:id="@+id/menu_save"
+        android:id="@+id/menu_settings"
         android:title="@string/action_settings"/>
 
 </menu>

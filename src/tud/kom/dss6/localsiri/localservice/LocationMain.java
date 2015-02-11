@@ -4,6 +4,7 @@ import tud.kom.dss6.localsiri.AskSiri;
 import tud.kom.dss6.localsiri.MyTopics;
 import tud.kom.dss6.localsiri.R;
 import tud.kom.dss6.localsiri.knowuraddress.KnowYourAddress;
+import tud.kom.dss6.localsiri.monitor.Monitor;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -62,8 +63,8 @@ public class LocationMain extends Activity {
 							Toast.LENGTH_SHORT).show();
 					break;
 				case 4:
-					Toast.makeText(LocationMain.this, "Monitor under dev",
-							Toast.LENGTH_SHORT).show();
+					startActivity(new Intent(LocationMain.this,
+							Monitor.class));
 					break;
 				case 5:
 					startActivity(new Intent(LocationMain.this, Settings.class));
@@ -123,7 +124,7 @@ public class LocationMain extends Activity {
 			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			break;
-		case R.id.menu_save:
+		case R.id.menu_settings:
 			startActivity(new Intent(this, Settings.class));
 			return true;
 		}

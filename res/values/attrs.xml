@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LineGraph">
+        <attr name="lineStrokeColor" format="color"/>
+        <attr name="lineAxisColor" format="color"/>
+        <attr name="lineStrokeWidth" format="dimension"/>
+        <attr name="lineStrokeSpacing" format="dimension"/>
+        <attr name="lineUseDip" format="boolean"/>
+        <attr name="lineBackground" format="color"/>
+    </declare-styleable>
+
+        
+</resources>
