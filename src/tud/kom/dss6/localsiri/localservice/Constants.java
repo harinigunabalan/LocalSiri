@@ -17,7 +17,7 @@ public class Constants {
 	}
 
 	public interface DEFAULT {
-		public static final int UPDATE_INTERVAL = 5000;
+		public static final int UPDATE_INTERVAL = 20000;
 		public static final int FASTEST_UPDATE_INTERVAL = UPDATE_INTERVAL / 2;
 		public static final int PRIORITY = LocationRequest.PRIORITY_HIGH_ACCURACY;
 
@@ -25,7 +25,7 @@ public class Constants {
 
 	public interface BATTERY_LEVEL {
 		public static final int HIGH = 80;
-		public static final int MEDIUM = 40;
+		public static final int MEDIUM = 50;
 		public static final int LOW = 30;
 		public static final int CRITICAL = 15;
 	}
@@ -44,10 +44,10 @@ public class Constants {
 	 * 
 	 */
 	public interface FREQUENCY_LEVEL {
-		public static final int HIGH = 5000;
-		public static final int MEDIUM = 7000;
-		public static final int LOW = 10000;
-		public static final int CRITICAL = 15000;
+		public static final int HIGH = 10000;
+		public static final int MEDIUM = 15000;
+		public static final int LOW = 20000;
+		public static final int CRITICAL = 30000;
 		public static final int DEAD = 0;
 	}
 
