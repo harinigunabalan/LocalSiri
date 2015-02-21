@@ -137,15 +137,15 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 			PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
 					notificationIntent, 0);
 
-			Intent previousIntent = new Intent(this, LocalSiriService.class);
-			previousIntent.setAction(Constants.ACTION.PREV_ACTION);
-			PendingIntent ppreviousIntent = PendingIntent.getService(this, 0,
-					previousIntent, 0);
+			Intent passivateIntent = new Intent(this, LocalSiriService.class);
+			passivateIntent.setAction(Constants.ACTION.PASSIVATE_ACTION);
+			PendingIntent ppassivateIntent = PendingIntent.getService(this, 0,
+					passivateIntent, 0);
 
-			Intent playIntent = new Intent(this, LocalSiriService.class);
-			playIntent.setAction(Constants.ACTION.PLAY_ACTION);
-			PendingIntent pplayIntent = PendingIntent.getService(this, 0,
-					playIntent, 0);
+			Intent activateIntent = new Intent(this, LocalSiriService.class);
+			activateIntent.setAction(Constants.ACTION.ACTIVATE_ACTION);
+			PendingIntent pactivateIntent = PendingIntent.getService(this, 0,
+					activateIntent, 0);
 
 			Bitmap icon = BitmapFactory.decodeResource(getResources(),
 					R.drawable.ic_notification);
@@ -161,18 +161,18 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 
 					.setOngoing(true)
 					.addAction(android.R.drawable.btn_star_big_off,
-							"Passivate", ppreviousIntent)
+							"Passivate", ppassivateIntent)
 					.addAction(android.R.drawable.ic_menu_help, "Activate",
-							pplayIntent).build();
+							pactivateIntent).build();
 			startForeground(Constants.NOTIFICATION_ID.FOREGROUND_SERVICE,
 					notification);
 
 			activate();
 
-		} else if (intent.getAction().equals(Constants.ACTION.PREV_ACTION)) {
+		} else if (intent.getAction().equals(Constants.ACTION.PASSIVATE_ACTION)) {
 			Log.i(TAG, "Deactivate Service");
 			passivate();
-		} else if (intent.getAction().equals(Constants.ACTION.PLAY_ACTION)) {
+		} else if (intent.getAction().equals(Constants.ACTION.ACTIVATE_ACTION)) {
 			Log.i(TAG, "Re-activate Service");
 			activate();
 		} else if (intent.getAction().equals(
@@ -297,11 +297,13 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 
 		boolean isAdapted = (optimizer.getFrequency() != mLocationRequest
 				.getInterval()) ? true : false;
+		
 		if (isAdapted) {
 			Log.i("Test", "Adapting to Context");
-			updateLocationRequest(optimizer);
+			
 			monitorAdaption.updateMonitor(optimizer, mLocationRequest,
 					preferenceLocation);
+			updateLocationRequest(optimizer);
 		} else {
 			Log.i("Test", "No need adaption");
 			monitorAdaption.updateMonitor(optimizer, mLocationRequest,

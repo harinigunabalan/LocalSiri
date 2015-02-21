@@ -19,6 +19,10 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
+       
+ *
+ *Reference:  HoloGraphLibrary 
+ *<https://bitbucket.org/danielnadeau/holographlibrary/wiki/Home> 
  */
 
 package tud.kom.dss6.localsiri.monitor.Graph;

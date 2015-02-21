@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Locale;
 
 import tud.kom.dss6.localsiri.R;
+import tud.kom.dss6.localsiri.localservice.LocationMain;
+import tud.kom.dss6.localsiri.localservice.Settings;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -16,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -42,13 +46,14 @@ public class KnowYourAddress extends Activity {
 
 	public void findAddress(View view) {
 		Location mLocation;
-		Log.e("KUA", "Came Here");
+
 		mLocation = locationManager
 				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		
 		if(mLocation == null){
-			Log.e("Change in provider:", "Trying Network Provider...");
+		Log.e("Change in provider:", "Trying Network Provider...");
 		mLocation = locationManager
-				.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+					.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		}
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD
 				&& Geocoder.isPresent()) {
@@ -63,10 +68,12 @@ public class KnowYourAddress extends Activity {
 				 */
 				(new GetAddressTask(this)).execute(mLocation);
 			}else{
+				mActivityIndicator.setVisibility(View.GONE);
+				
 				Toast.makeText(this,
 						"Location is Empty. Please reset GPS Switch",
 						Toast.LENGTH_SHORT).show();
-				mActivityIndicator.setVisibility(View.GONE);
+				
 				
 			}
 			
@@ -164,20 +171,24 @@ public class KnowYourAddress extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.know_your_address, menu);
-		return true;
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.location_main, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			Log.d("Menu", "Clicked Home");
+			Intent intent = new Intent(this, LocationMain.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			break;
+		case R.id.menu_settings:
+			startActivity(new Intent(this, Settings.class));
 			return true;
 		}
-		return super.onOptionsItemSelected(item);
+		return false;
 	}
 }

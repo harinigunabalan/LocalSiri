@@ -57,11 +57,11 @@ public class Settings extends PreferenceActivity implements
 		case Constants.SETTINGS.pref_key_temporary_service:
 			if (sharedPreferences.getBoolean(key, true)) {
 				Intent startIntent = new Intent(this, LocalSiriService.class);
-				startIntent.setAction(Constants.ACTION.PLAY_ACTION);
+				startIntent.setAction(Constants.ACTION.ACTIVATE_ACTION);
 				startService(startIntent);
 			} else {
 				Intent stopIntent = new Intent(this, LocalSiriService.class);
-				stopIntent.setAction(Constants.ACTION.PREV_ACTION);
+				stopIntent.setAction(Constants.ACTION.PASSIVATE_ACTION);
 				startService(stopIntent);
 			}
 			break;

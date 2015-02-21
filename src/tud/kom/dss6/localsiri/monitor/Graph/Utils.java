@@ -4,6 +4,9 @@ import android.graphics.Color;
 
 /**
  * Created by sbaiget on 11/04/2014.
+ *
+ *Reference:  HoloGraphLibrary 
+ *<https://bitbucket.org/danielnadeau/holographlibrary/wiki/Home> 
  */
 public class Utils {
 

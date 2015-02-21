@@ -107,7 +107,7 @@ public class GraphHome extends Activity {
 			batteryLinePoints.setY(Integer.parseInt(monitorValue
 					.get("BatteryLevel")));
 			frequencyLinePoints.setY((Integer.parseInt(monitorValue
-					.get("LocationFrequency_Adapted")) / 1000));
+					.get("LocationFrequency")) / 1000));
 
 			date[index] = monitorValue.get("Date");
 			optimization_mode[index] = monitorValue.get("UserPreference_Location");
