@@ -21,7 +21,7 @@ public class MonitorAdaption {
 
 		LocalSiriService locationSiriService = new LocalSiriService();
 
-		monitorPojo.setmDate(locationSiriService.getDateTime());
+		monitorPojo.setmDate(locationSiriService.getCurrentDateTime());
 		monitorPojo.setmBatteryLevel(preferenceLocation.mBatteryLevel);
 		monitorPojo.setmLocationFrequency((int) mLocationRequest.getInterval());
 		monitorPojo.setmLocationFrequency_Adapted(optimizer.getFrequency());

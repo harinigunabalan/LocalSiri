@@ -37,6 +37,11 @@ import com.ibm.mobile.services.push.IBMPush;
 import com.ibm.mobile.services.push.IBMPushNotificationListener;
 import com.ibm.mobile.services.push.IBMSimplePushNotification;
 
+// Reference: http://www.ibm.com/developerworks/library/mo-android-mobiledata-app/
+// IBM Bluemix Tutorial for storing Data in mobile cloud  
+// Reference: http://www.ibm.com/developerworks/library/mo-android-mobiledata-app/
+// IBM Bluemix Tutorial for retrieving Data from mobile cloud 
+
 public class LocalSiriApplication extends Application {
 
 	private static final String APP_ID = "applicationID";
@@ -59,7 +64,7 @@ public class LocalSiriApplication extends Application {
 	public static IBMPush push = null;
 	private Activity mActivity;
 	private static final String deviceAlias = "TargetDevice";
-	private static final String consumerID = "LocalSiriApp";
+	private static String consumerID;
 	private IBMPushNotificationListener notificationListener = null;
 	// Push Declarations end
 
@@ -189,6 +194,22 @@ public class LocalSiriApplication extends Application {
 		// Initialize IBM Push service.
 		IBMPush.initializeService();
 		// Retrieve instance of the IBM Push service.
+		
+		/* Set the Device MAC address */
+		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		WifiInfo wInfo = wifiManager.getConnectionInfo();
+		String consumerID = wInfo.getMacAddress();
+
+		// Creating Shared Preference for the Application
+		SharedPreferences sharedpreferences = mContext.getSharedPreferences(
+				LocalSiriApplication.PREFERENCES, MODE_PRIVATE);
+		Editor editor = sharedpreferences.edit();
+		editor.putString(MAC, consumerID);
+		editor.putString(LAST_UPLOAD, "");
+		editor.putInt(UPLOAD_COUNTER, 0);
+		editor.putBoolean(CURRENT_LOCATION, false);
+		editor.commit();		
+		
 		push = IBMPush.getService();
 		// Register the device with the IBM Push service.
 		push.register(deviceAlias, consumerID).continueWith(
@@ -220,21 +241,6 @@ public class LocalSiriApplication extends Application {
 			}
 
 		};
-
-		/* Set the Device MAC address */
-		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-		WifiInfo wInfo = wifiManager.getConnectionInfo();
-		String macAddress = wInfo.getMacAddress();
-
-		// Creating Shared Preference for the Application
-		SharedPreferences sharedpreferences = mContext.getSharedPreferences(
-				LocalSiriApplication.PREFERENCES, MODE_PRIVATE);
-		Editor editor = sharedpreferences.edit();
-		editor.putString(MAC, macAddress);
-		editor.putString(LAST_UPLOAD, "");
-		editor.putInt(UPLOAD_COUNTER, 0);
-		editor.putBoolean(CURRENT_LOCATION, false);
-		editor.commit();
 	}
 
 	public static Context getContext() {

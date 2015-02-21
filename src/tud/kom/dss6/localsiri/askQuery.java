@@ -149,7 +149,9 @@ public class askQuery  extends Activity {
     	/* Set the Post Content */
     	post.setMac(macAddress);
     	post.setPostContent(PostContent.getText().toString()); 
-    	
+  
+    	// Reference: http://www.ibm.com/developerworks/library/mo-android-mobiledata-app/
+    	// IBM Bluemix Tutorial for Storing Data in mobile cloud     	
     	/*
     	 * Adding Topics to Mobile Cloud Data of IBM Bluemix        
     	 */                       	                	                	                	                	            
@@ -264,6 +266,9 @@ public class askQuery  extends Activity {
              	} );         
     }  
     
+    // Reference: http://www.ibm.com/developerworks/library/mo-android-push-app/
+    // IBM Bluemix Tutorial to send push notification to other devices.
+    // Below Client Code calls the server code running in push service in the IBM Bluemix
     private void updateOtherDevices(Topic topic) {
 
 		// initialize and retrieve an instance of the IBM CloudCode service

@@ -52,7 +52,10 @@ public class Monitor extends ListActivity {
 
 		});
 	}
-
+	
+	/**
+	 * Method that displays the List view of Monitor
+	 */
 	private void displayMonitorLog() {
 
 		ArrayList<HashMap<String, String>> monitorValues = new ArrayList<HashMap<String, String>>();
@@ -93,6 +96,10 @@ public class Monitor extends ListActivity {
 		DB.close();
 	}
 
+	/**
+	 * Method that displays the Graphical view of Monitor
+	 * @param view
+	 */
 	public void monitorGraph(View view) {
 		Intent graph = new Intent(this, GraphHome.class);
 

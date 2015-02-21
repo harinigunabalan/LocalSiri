@@ -14,6 +14,9 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+//Reference: https://github.com/AdilSoomro/Android-Speech-Bubble
+//Sample Chat adapter code taken from Github and customized to our Application
+
 public class ChatAdapter extends BaseAdapter{
 
 	public static final String CLASS_NAME = "Chat Adapter";

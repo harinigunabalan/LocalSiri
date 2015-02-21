@@ -1,3 +1,10 @@
+/**
+ * Main Start point of the Application. The Foreground Service to collect data and perform adaption
+ * 
+ * Reference GoogleApiClient
+ * From <https://developer.android.com/reference/com/google/android/gms/common/api/GoogleApiClient.html> 
+ */
+
 package tud.kom.dss6.localsiri.localservice;
 
 import java.text.SimpleDateFormat;
@@ -82,6 +89,9 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 
 	}
 
+	/**
+	 * Method to build GoogleApiClient
+	 */
 	protected synchronized void buildGoogleApiClient() {
 		Log.i(TAG, "Building GoogleApiClient");
 		mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -91,6 +101,9 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		createLocationRequest();
 	}
 
+	/**
+	 * Start Up defaults values to initialize the Location Request Object 
+	 */
 	protected void createLocationRequest() {
 		Log.d(TAG, "Creating Location Request");
 		mLocationRequest = new LocationRequest();
@@ -101,6 +114,13 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		mLocationRequest.setPriority(Constants.DEFAULT.PRIORITY);
 	}
 
+	/**
+	 * Method to update to Location Request Object where there is change needed
+	 * 
+	 * @param optimizer
+	 *            Object containing new optimized values of Frequency and
+	 *            Priority if Location Request
+	 */
 	protected void updateLocationRequest(Optimizer optimizer) {
 
 		Log.i(TAG, "Updating Listener: \n Initial Interval: "
@@ -189,6 +209,9 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		return START_STICKY;
 	}
 
+	/**
+	 * Method to start Location Request  
+	 */
 	protected void startLocationUpdates() {
 		Log.i(TAG, "Registered with Location Listener");
 
@@ -196,13 +219,19 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 				mGoogleApiClient, mLocationRequest, this);
 	}
 
+	/**
+	 * Method to store location information in Local SQLite DB
+	 * 
+	 * @param location
+	 *            Current Location info
+	 */
 	protected void addGeoLocation(Location location) {
 
 		if (location != null) {
 
 			HashMap<String, String> geoPointsSet = new HashMap<String, String>();
 
-			geoPointsSet.put(LocationMain.KEY_DATE, getDateTime());
+			geoPointsSet.put(LocationMain.KEY_DATE, getCurrentDateTime());
 			geoPointsSet.put(LocationMain.KEY_LATITUDE,
 					String.valueOf(location.getLatitude()));
 			geoPointsSet.put(LocationMain.KEY_LONGITUDE,
@@ -218,12 +247,16 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 			Log.d(TAG, "No Info");
 		}
 	}
-
-	public String getDateTime() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat(
+	
+	/**
+	 *Method to generate Date and time in Customized format 
+	 * @return Date and time in customized format
+	 */
+	public String getCurrentDateTime() {
+		SimpleDateFormat customDateTime = new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-		Date date = new Date();
-		return dateFormat.format(date);
+		Date currentDate = new Date();
+		return customDateTime.format(currentDate);
 	}
 
 	protected void stopLocationUpdates() {
@@ -231,6 +264,9 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 				mGoogleApiClient, this);
 	}
 
+	/**
+	 * Method to register all listeners
+	 */
 	public void activate() {
 		if (!mServiceStatus) {
 			mGoogleApiClient.connect();
@@ -240,6 +276,10 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 		}
 	}
 
+	/**
+	 * Method to unregister all listeners.
+	 * Also called to temporarily stop Service from Notification 
+	 */
 	public void passivate() {
 
 		if (mGoogleApiClient.isConnected() || mGoogleApiClient.isConnecting()) {
@@ -297,10 +337,10 @@ public class LocalSiriService extends Service implements ConnectionCallbacks,
 
 		boolean isAdapted = (optimizer.getFrequency() != mLocationRequest
 				.getInterval()) ? true : false;
-		
+
 		if (isAdapted) {
 			Log.i("Test", "Adapting to Context");
-			
+
 			monitorAdaption.updateMonitor(optimizer, mLocationRequest,
 					preferenceLocation);
 			updateLocationRequest(optimizer);

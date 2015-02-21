@@ -11,7 +11,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.example.graphdemo.MainActivity" >
+        tools:context="tud.kom.dss6.localsiri.monitor.GraphHome" >
 
         <tud.kom.dss6.localsiri.monitor.Graph.LineGraph
             android:id="@+id/graph"

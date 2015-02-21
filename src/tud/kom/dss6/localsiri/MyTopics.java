@@ -84,6 +84,9 @@ public class MyTopics extends Activity {
 	public void listMyTopics() {
 		try {
 
+	    	// Reference: http://www.ibm.com/developerworks/library/mo-android-mobiledata-app/
+	    	// IBM Bluemix Tutorial for retrieving Data from mobile cloud 			
+			
 			Log.e(CLASS_NAME, "Entered listMyTopics");
 			IBMQuery<Topic> query = IBMQuery.queryForClass(Topic.class);
 
