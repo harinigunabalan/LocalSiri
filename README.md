@@ -12,11 +12,12 @@ Opportunistic Sensing Android App that Localizes users based on GPS data and use
 
 ### Key features ###
 
-* Decentralized and without Internet - using Wi-Fi P2p API of Android
-* Exchanges only with Trusted Friends - using NFC and local PINs to securely Add Friends to Trust Zone
-* Collected profiles are stored Locally on user's devices - using SQLite DataHandlers and JSON objects
-*  User can later browse friends Profile - using Profile View UIs
-*  Automatic Content Exchange whenever friends are in Proximity via any D2D Communication Technique(WifiP2P) Network Service Discovery 
-*  The app should be Secure - Only friends can exchange Contents  - using Encrypted exchange of Profile data AES-256 
-*  UI - As Less Interactions as possible - Implementing as foreground Service
-*  UI – Appealing to view profiles
+* Design and implementation of a context aware
+opportunistic sensing system
+* Design tasking mechanisms that trigger data collection
+depending on the user‘s context
+* Employs built-in sensors in smart-phones to collect
+data automatically
+* Services from IBM Bluemix cloud platform as the
+back-end server is used for tasks dissemination, data
+aggregation and visualization
