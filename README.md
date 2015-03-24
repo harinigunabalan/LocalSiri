@@ -35,7 +35,13 @@ Blood donation needed)
 * Use it in Business to Advertise offers
 * Minimal User Permissions
 
-### Screenshots
+## Screenshots
 
+### Homepage:
 ![LocalSiri.png](https://bitbucket.org/repo/oepMKd/images/808643754-LocalSiri.png)
 
+### Settings:
+![Settings.png](https://bitbucket.org/repo/oepMKd/images/3845391269-Settings.png)
+
+### Monitor
+![monitor_final.png](https://bitbucket.org/repo/oepMKd/images/2528056565-monitor_final.png)
