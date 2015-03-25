@@ -27,7 +27,7 @@ public class CriteriaSelector {
 	 *            The current battery-level from the device</li> <li>
 	 *            isIntelligenceOverridden - If user has overridden the
 	 *            Intelligent Optimizer</li> <li>userScheme - In-case if the
-	 *            user has overridden what is the chosen scheme</li>
+	 *            user has overridden schemes, then the chosen scheme</li>
 	 */
 	public CriteriaSelector(PreferenceLocation preferenceLocation) {
 		this.batteryLevel = preferenceLocation.mBatteryLevel;
