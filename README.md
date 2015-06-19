@@ -35,7 +35,7 @@ Opportunistic Sensing Android App that Localizes users based on GPS data and use
 
 ## Screenshots
 * The application UI and the foreground LocalSiri service controls are shown below:
-![alt tag](https://cloud.githubusercontent.com/assets/9555615/8252394/e6857cf8-1685-11e5-8393-a3aa58324af8.jpg)
+![alt tag](https://cloud.githubusercontent.com/assets/9555615/8252376/c6e213d4-1685-11e5-92ca-001b38aa9821.png)
 
 * The question forum and Topics of the LocalSiri can be seen below:
 ![alt tag](https://cloud.githubusercontent.com/assets/9555615/8252379/cb9f33ca-1685-11e5-8de8-3cafa73e3edf.png)
@@ -43,8 +43,10 @@ Opportunistic Sensing Android App that Localizes users based on GPS data and use
 ### Settings/Preferences
 ![alt tag](https://cloud.githubusercontent.com/assets/9555615/8252384/d31e2bb0-1685-11e5-9541-14a441e68cc8.png)
 
-### Monitor: Helps the user understand how the context aware adaption occurs with the system. 
+### Monitor
+* Helps the user understand how the context aware adaption occurs with the system. 
 ![alt tag](https://cloud.githubusercontent.com/assets/9555615/8252388/ddb0279a-1685-11e5-9cb0-bccff45870a4.png)
 
-### Analytics of the Application in the Bluemix Console (Data stored in the Mobile Data Cloud and Push Notifications sent)
+### Analytics of the Application in the Bluemix Console 
+* Data is stored in the Mobile Data Cloud and details of the Push Notifications sent
 ![alt tag](https://cloud.githubusercontent.com/assets/9555615/8252398/f67ed15e-1685-11e5-91e6-a08275f6b931.png)
